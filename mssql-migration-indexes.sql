@@ -1,14 +1,10 @@
--- CISPRO INDEX SET
---last changed for schema 245 5/29/2008
 -- MSSQL ONLY!!!
 
 USE CAFUSER
 
---resunc sequences
 execute seq_fix;
 GO
 
---mssql indexes
 If Exists ( SELECT name FROM sysindexes WHERE name = 'IDX_APPROVEDVENDORS') DROP INDEX APPROVED_VENDORS.IDX_APPROVEDVENDORS;  create index IDX_APPROVEDVENDORS on APPROVED_VENDORS (STANDARDID);
 If Exists ( SELECT name FROM sysindexes WHERE name = 'IDX1_AUDITCOLUMNS') DROP INDEX AUDIT_COLUMNS.IDX1_AUDITCOLUMNS;  create index IDX1_AUDITCOLUMNS on AUDIT_COLUMNS (AUDITTABLEID);
 If Exists ( SELECT name FROM sysindexes WHERE name = 'IDX1_AUDITTABLES') DROP INDEX AUDIT_TABLES.IDX1_AUDITTABLES;  create index IDX1_AUDITTABLES on AUDIT_TABLES (AUDITTRANSACTIONID);
@@ -177,7 +173,6 @@ If Exists ( SELECT name FROM sysindexes WHERE name = 'idx_sessiondata_page_FK') 
 If Exists ( SELECT name FROM sysindexes WHERE name = 'idx_appfeatures_featname') DROP INDEX application_features.idx_appfeatures_featname;  create index idx_appfeatures_featname on application_features (featurename);
 If Exists ( SELECT name FROM sysindexes WHERE name = 'idx_appfeatures_sigpage') DROP INDEX application_features.idx_appfeatures_sigpage;  create index idx_appfeatures_sigpage on application_features (signaturepage);
 
---new as of 9/17/2009
 If Exists ( SELECT name FROM sysindexes WHERE name = 'idx_mds1' ) DROP INDEX containers.idx_mds1; create index idx_mds1 on CONTAINERS(RECEIPTLOTID,EXPIRATIONDATE);
 If Exists ( SELECT name FROM sysindexes WHERE name = 'idx_mds2' ) DROP INDEX receiptlots_testing.idx_mds2; create index idx_mds2 on RECEIPTLOTS_TESTING(RECEIPTLOTID,DELETED,NEXTRETESTDATE);
 If Exists ( SELECT name FROM sysindexes WHERE name = 'idx_mds3' ) DROP INDEX properties_values.idx_mds3; create index idx_mds3 on PROPERTIES_VALUES(MATERIALID,PROPERTYID);
